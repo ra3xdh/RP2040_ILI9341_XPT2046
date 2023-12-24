@@ -20,8 +20,10 @@ add_executable(ili9341_synthez
     main.c
     ili9341.c
     ili9341.h
-    ili9341_framebuffer.c
-    ili9341_framebuffer.h
+    #ili9341_framebuffer.c
+    #ili9341_framebuffer.h
+    ili9341_draw.c
+    ili9341_draw.h
 )
 
 # Add pico_stdlib library which aggregates commonly used features
