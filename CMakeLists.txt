@@ -9,14 +9,13 @@ cmake_minimum_required(VERSION 3.13)
 set(PICO_SDK_ROOT $ENV{HOME}/pico-sdk)
 include(${PICO_SDK_ROOT}/external/pico_sdk_import.cmake)
 
-project(RP2040_ILI9341_SI5351)
-set(EXE ili9341_synthez)
-
+project(RP2040_ILI9341_XPT2046)
+set(EXE rp2040_ili9341_xpt2046)
 
 # initialize the Raspberry Pi Pico SDK
 pico_sdk_init()
 
-add_executable(ili9341_synthez
+add_executable(${EXE}
     main.c
     ili9341.c
     ili9341.h
