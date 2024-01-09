@@ -26,6 +26,8 @@ add_executable(ili9341_synthez
     ili9341_draw.h
     xpt2046.c
     xpt2046.h
+    ugui.c
+    ugui.h
 )
 
 # Add pico_stdlib library which aggregates commonly used features

@@ -13,10 +13,16 @@ void draw_circle(uint16_t poX, uint16_t poY, uint16_t r,uint16_t color);
 void fill_circle(uint16_t poX, uint16_t poY, uint16_t r,uint16_t color);
 void fill_screen(uint16_t color);
 void fill_rectangle(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color);
+void fill_rectangle_alt(uint16_t XL, uint16_t XR, uint16_t YU, uint16_t YD, uint16_t color);
+
+uint16_t inline swap_bytes(uint16_t color) {
+    return (color>>8) | (color<<8);
+}
 
 uint16_t inline RGBConv(uint16_t R, uint16_t G, uint16_t B)
 {
-    return ((unsigned int)( (( R >> 3 ) << 11 ) | (( G >> 2 ) << 5 ) | ( B >> 3 )));
+    uint16_t tmp = ((unsigned int)( (( R >> 3 ) << 11 ) | (( G >> 2 ) << 5 ) | ( B >> 3 )));
+    return swap_bytes(tmp);
 }
 
 #endif

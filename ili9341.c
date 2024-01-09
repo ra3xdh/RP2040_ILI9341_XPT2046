@@ -162,7 +162,4 @@ void ili9341_init() {
 
 }
 
-uint16_t swap_bytes(uint16_t color) {
-    return (color>>8) | (color<<8);
-}
 

@@ -4,6 +4,7 @@
 #include "ili9341.h"
 #include "ili9341_draw.h"
 
+uint16_t constrain(uint16_t X, uint16_t A, uint16_t B);
 
 void set_col(uint16_t StartCol,uint16_t EndCol)
 {
@@ -149,5 +150,51 @@ void fill_circle(uint16_t poX, uint16_t poY, uint16_t r,uint16_t color)
 
 }
 
+
+uint16_t constrain(uint16_t X, uint16_t A, uint16_t B)
+{
+    if ( X < A )
+        return A;
+    else if ( X > B )
+        return B;
+    else
+        return X;
+}
+
+void fill_rectangle_alt(uint16_t XL, uint16_t XR, uint16_t YU, uint16_t YD, uint16_t color)
+{
+    unsigned long XY=0;
+
+    if(XL > XR)
+    {
+        XL = XL^XR;
+        XR = XL^XR;
+        XL = XL^XR;
+    }
+    if(YU > YD)
+    {
+        YU = YU^YD;
+        YD = YU^YD;
+        YU = YU^YD;
+    }
+    XL = constrain(XL, 0, ILI9341_TFTWIDTH);
+    XR = constrain(XR, 0, ILI9341_TFTWIDTH);
+    YU = constrain(YU, 0, ILI9341_TFTHEIGHT);
+    YD = constrain(YD, 0, ILI9341_TFTHEIGHT);
+
+    XY = (XR-XL+1);
+    XY = XY*(YD-YU+1);
+
+    set_col(XL,XR);
+    set_page(YU, YD);
+    ili9341_set_command(ILI9341_RAMWR);
+    ili9341_start_writing();
+    for(uint32_t i=0; i < XY; i++)
+    {
+        ili9341_write_data_continuous(&color,2);
+    }
+    ili9341_stop_writing();
+
+}
 
 
